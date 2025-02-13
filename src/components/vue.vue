@@ -2,7 +2,6 @@
   <div>
     <a href="page.html">page</a>
     <a href="https://www.google.com" @click.prevent>a</a>
-    <!-- Убран v-if, так как clicked не используется -->
     <div>{{ name }}</div>
     <div>{{ surn }}</div>
     <p>{{ full }}</p>
@@ -13,10 +12,47 @@
     <input type="number" v-model.number="inputNumber">
     <button @click="showSquare">Показать квадрат</button>
     {{ text }}
-    <button @click="change">text</button>
-    <button @click="change1">text</button>
-    <button @click="change2">cost</button>
-    <div>Cost: {{ cost }}</div> <!-- Отображаем значение cost -->
+    <button @click="changeTextToYyy">Change text to yyy</button>
+    <button @click="changeTextToVvv">Change text to vvv</button>
+    <button @click="changeCost">Change cost</button>
+    <div>Cost: {{ cost }}</div>
+    <!-- Упрощенное управление видимостью абзацев -->
+    <button @click="toggleVisible">
+      Toggle Visibility {{ visible ? 'hide' : 'show' }}
+    </button>
+    <p v-if="visible">Text when 'visible' is true.</p>
+
+    <button @click="toggleV">
+      Toggle V {{ v ? 'hide' : 'show' }}
+    </button>
+    <p v-if="v">Textff</p>
+
+    <button @click="toggleE">
+      Toggle E {{ e ? 'hide' : 'show' }}
+    </button>
+    <p v-if="e">Textdd</p>
+    <p v-if="isAdmin">+++</p>
+    <p v-else>---</p>
+
+    <p v-if="day === 1">пон</p>
+	  <p v-if="day === 2">втор</p>
+	  <p v-if="day === 3">сре</p>
+	  <p v-if="day === 4">чет</p>
+	  <p v-if="day === 5">пят</p>
+	  <p v-if="day === 6">суб</p>
+	  <p v-if="day === 7">вос</p>
+
+    <p v-if="age <= 18">подросток</p>
+    <p v-else-if="age <= 25">молодой</p>
+    <p v-else>дед</p>
+    <button @click="togglea">
+       {{ isAuth ? 'hide' : 'show' }}
+    </button>
+    <div v-if="isAuth">
+		<p>+++</p>
+		<p>+++</p>
+		<p>+++</p>
+	</div>
   </div>
 </template>
 
@@ -36,22 +72,41 @@ export default {
       obj: { x: 1, y: 2, z: 3 },
       cost: 150,
       pr: 12,
-      inputNumber: 0, // Число для возведения в квадрат
+      inputNumber: 0,
+      visible: false,
+      v: true,
+      e: true,
+      isAdmin: true,
+      day: 7,
+      age: 25,
+      isAuth: true,
     };
   },
   methods: {
-    change() {
+    changeTextToYyy() {
       this.text = 'yyy';
     },
-    change1() {
+    changeTextToVvv() {
       this.text = 'vvv';
     },
-    change2() {
+    changeCost() {
       this.cost = 12;
     },
     showSquare() {
-      //const square = this.inputNumber * this.inputNumber;
-      //alert(`Квадрат числа ${this.inputNumber} равен ${square}`);
+      const s = this.inputNumber * this.inputNumber;
+      alert(`Квадрат числа ${this.inputNumber} равен ${s}`);
+    },
+    toggleVisible() {
+      this.visible = !this.visible;
+    },
+    toggleV() {
+      this.v = !this.v;
+    },
+    toggleE() {
+      this.e = !this.e;
+    },
+    togglea(){
+      this.isAuth = !this.isAuth
     },
   },
   computed: {
