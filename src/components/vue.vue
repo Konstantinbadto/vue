@@ -106,7 +106,7 @@
        <p v-for="product in products1" :key="products1.id">
       {{ products1.name }}
 	</p>
-  <p v-for="elem in arr1">
+  <p v-for="elem in arr1 ">
 		{{ elem }}
 	</p>
 	<button @click="add">add</button>
