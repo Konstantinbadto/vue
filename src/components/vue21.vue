@@ -1,63 +1,50 @@
 <template>
-    <div>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Имя</th>
-            <th>Зарплата</th>
-            <th>Возраст</th>
-            <th>Действия</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="user in users" :key="user.id">
-            <td>{{ user.id }}</td>
-            <td>{{ user.name }}</td>
-            <td>{{ user.salary }}</td>
-            <td>{{ user.age }}</td>
-            <td>
-              <a href="#" @click.prevent="deleteUser(user.id)">Удалить</a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </template>
+  <div>
+    <h1>Список сотрудников</h1>
+    <Employee
+      v-for="employee in employees"
+      :key="employee.id"
+      :name="employee.name"
+      :salary="employee.salary"
+      :age="employee.age"
+    />
+    <ChildComponent :items="myArray" />
+    <h1>Родительский компонент</h1>
+    <p>Сообщение: {{ message }}</p>
+    <ChildComponent
+      :firstFunction="updateMessageToHello"
+      :secondFunction="updateMessageToWorld"
+    />
+  </div>
+</template>
 
-  <script>
-  export default {
-    data() {
-      return {
-        users: [
-          { id: 1, name: 'name1', salary: 100, age: 30 },
-          { id: 2, name: 'name2', salary: 200, age: 40 },
-          { id: 3, name: 'name3', salary: 300, age: 50 },
-        ],
-      };
+<script>
+import Employee from './Employee.vue';
+import ChildComponent from './Employee.vue'; // ИСПРАВЛЕН ИМПОРТ
+
+export default {
+  components: {
+    Employee,
+    ChildComponent,
+  },
+  data() {
+    return {
+      employees: [
+        { id: 1, name: 'Иван', salary: 50000, age: 30 },
+        { id: 2, name: 'Петр', salary: 60000, age: 35 },
+        { id: 3, name: 'Анна', salary: 70000, age: 28 },
+      ],
+      myArray: ['Элемент 1', 'Элемент 2', 'Элемент 3'],
+      message: 'Начальное сообщение',
+    };
+  },
+  methods: {
+    updateMessageToHello() {
+      this.message = 'Привет!';
     },
-    methods: {
-      deleteUser(userId) {
-        this.users = this.users.filter(user => user.id !== userId);
-      },
+    updateMessageToWorld() {
+      this.message = 'Мир!';
     },
-  };
-  </script>
-
-  <style scoped>
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-
-  th,
-  td {
-    border: 1px solid black;
-    padding: 8px;
-    text-align: left;
-  }
-
-  th {
-    background-color: #f2f2f2;
-  }
-  </style>
+  }, // ИСПРАВЛЕНА СТРУКТУРА
+};
+</script>

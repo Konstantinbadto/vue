@@ -1,7 +1,7 @@
 <script setup>
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
-import vue from './components/vue2.vue'
+import vue from './components/vue22.vue'
 </script>
 
 
